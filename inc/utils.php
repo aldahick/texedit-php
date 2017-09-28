@@ -74,4 +74,11 @@ function http_error($code) {
     $db->close();
     die($msg);
 }
+
+/**
+ * Generates a random string of `length`
+ */
+function generate_random_string($length) {
+    return bin2hex(openssl_random_pseudo_bytes($length / 2));
+}
 ?>

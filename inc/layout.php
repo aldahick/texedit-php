@@ -9,7 +9,11 @@ function layout_header() {
         $title = $_VIEW["title"] . " - " . $title;
     }
     if ($page_name != "/register" && $page_name != "/login") {
-        $_SESSION["last_page"] = $page_name;
+        $_SESSION["last_page"] = substr($page_name, 1) . ".php";
+    }
+    if (isset($_VIEW["requires_auth"]) && $_VIEW["requires_auth"] && !isset($_SESSION["user"])) {
+        redirect("login.php");
+        exit;
     }
 ?>
 <!DOCTYPE html>

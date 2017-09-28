@@ -1,0 +1,21 @@
+body,
+body *:not(.glyphicon) {
+    font-family: 'Source Sans Pro', 'Roboto', Helvetica, Arial, sans-serif;
+}
+
+.parent-row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+#status-error, #status-success {
+    font-weight: bold;
+}
+
+#status-error {
+    color: red;
+}
+
+#status-success {
+    color: green;
+}
