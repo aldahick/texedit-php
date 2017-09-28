@@ -24,6 +24,7 @@ function handle_registration() {
     $_SESSION["user"] = $user;
     return "";
 }
+
 function get_user_value($name) {
     global $user;
     if (isset($user[$name])) return $user[$name];
@@ -50,24 +51,6 @@ function form_group($name, $input_type, $code_name = "") {
 <?php
 }
 ?>
-<!--
-div.col-xs-12.col-md-6.col-md-offset-3
-    div.text-center
-        h2 Register
-        h4 Create a new account
-        span#error #{error}
-        span#success #{success}
-    hr
-    form.form-horizontal#form-register(action="/api/auth/local/register", method="POST")
-        div.form-group X3
-            label.col-md-2.col-md-offset-1.control-label(for="input-" + codeName) #{name}
-            div.col-md-6
-                input.form-control(id="input-" + codeName, name=codeName, type=inputType, required)
-            div.col-md-3
-        div.form-group.text-center
-            div
-                input.btn.btn-success.btn-submit(type="submit", value="Submit")
--->
 <div class="col-xs-12 col-md-6 col-md-offset-3">
     <div class="text-center">
         <h2>Register</h2>
