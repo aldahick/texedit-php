@@ -10,6 +10,9 @@ function layout_header() {
     }
     if ($page_name != "/register" && $page_name != "/login") {
         $_SESSION["last_page"] = substr($page_name, 1) . ".php";
+        if (strlen($_SERVER['QUERY_STRING']) > 0) {
+            $_SESSION["last_page"] .= "?" . $_SERVER['QUERY_STRING'];
+        }
     }
     if (isset($_VIEW["requires_auth"]) && $_VIEW["requires_auth"] && !isset($_SESSION["user"])) {
         redirect("login.php");
@@ -36,7 +39,7 @@ function layout_header() {
     <?php endforeach; ?>
     <link rel="stylesheet" href="css/global.css" />
     <?php
-    if (file_exists(__DIR__ . "/" . $main_css)):
+    if (file_exists(__DIR__ . "/../" . $main_css)):
     ?>
         <link rel="stylesheet" href="<?=$main_css?>" />
     <?php endif; ?>
@@ -74,7 +77,8 @@ function layout_header() {
 }
 
 function layout_footer() {
-    global $db;
+    global $db, $_VIEW;
+    $page_name = get_page_name();
     $db->close();
 ?>
                     </div>
@@ -87,11 +91,11 @@ function layout_footer() {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.20.18/system.js"></script>
+    <?php foreach ($_VIEW["js"] as $k => $url): ?>
+        <script src="<?=$url?>"></script>
+    <?php endforeach; ?>
+    <script src="js/common.js"></script>
     <script>
-        SystemJS.config({
-            "baseURL": "js/",
-            "map": {}
-        });
         SystemJS.import("<?=$page_name?>".substring(1) + ".js");
     </script>
 </body>
