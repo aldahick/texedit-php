@@ -7,9 +7,7 @@ function handle_create() {
     if (!check_params(array("title"))) {
         return "You must provide a title to create a note.";
     }
-    $sql = "INSERT INTO `note` (`author_id`, `title`, `body`)
-        VALUES (:author_id, :title, '')
-        ON DUPLICATE KEY UPDATE `title` = VALUES(`title`)";
+    $sql = "CALL create_note(:author_id, :title)";
     $db->query($sql, array(
         "author_id" => $_SESSION["user"]->id,
         "title" => $_POST["title"]));
