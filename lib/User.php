@@ -48,7 +48,7 @@ class User {
         $db->query($sql, $user);
         // get the user's ID
         $sql = "SELECT LAST_INSERT_ID() AS id";
-        $row = $db->query($sql);
+        $row = $db->query_single($sql);
         $user["id"] = $row["id"];
         return new User($user);
     }
