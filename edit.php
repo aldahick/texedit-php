@@ -23,7 +23,7 @@ if (get_http_method() == "POST") {
 
 $note = $db->query_single("SELECT * FROM `note` WHERE `id` = :id", array("id" => $_GET["id"]));
 if (!$note) http_error(404);
-if ($note["is_shared"] == 0 && $note["author_id"] != $_SESSION["user"]->id) {
+if ($note["is_shared"] == 0 && (isset($_SESSION["user"]) && $note["author_id"] != $_SESSION["user"]->id)) {
     http_error(403);
 }
 $_VIEW["css"] = array("https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css");
