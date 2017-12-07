@@ -26,13 +26,12 @@ layout_header();
             <?php foreach ($notes as $k => $note): ?>
                 <tr class="note-row" data-id="<?=$note["id"]?>">
                     <td>
-                        <a href="edit.php?id=<?=$note["id"]?>"><?=$note["title"]?></a>
+                        <a href="edit.php?id=<?=$note["id"]?>"><?=htmlspecialchars($note["title"])?></a>
                     </td>
                     <td>
-                        <!--date("F j, Y")-->
                         <?=$note["created"]?>
                     </td>
-                    <td><?=$note["author_username"]?></td>
+                    <td><?=htmlspecialchars($note["author_username"])?></td>
                     <td>
                         <span class="btn-delete glyphicon glyphicon-trash"></span>
                     </td>
