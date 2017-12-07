@@ -18,6 +18,13 @@ function get_http_method() {
     return $_SERVER["REQUEST_METHOD"];
 }
 
+/**
+ * Wrapper around native mail() that provides "From: no-reply@texedit.com" and sets proper content-type header
+ */
+function send_email($to, $subject, $body) {
+    return mail($to, $subject, $body, "From: no-reply@texedit.com\r\nContent-Type: text/html");
+}
+
 function load_config() {
     $config = array();
     $files = scandir(__DIR__ . "/../config/");

@@ -2,12 +2,12 @@
 require_once(__DIR__ . "/inc/layout.php");
 
 function handle_login() {
-    if (!check_params(array("username", "password"))) {
-        return "You must provide both an username and a password in order to log in.";
+    if (!check_params(array("email", "password"))) {
+        return "You must provide both an email and a password in order to log in.";
     }
-    $user = User::login($_POST["username"], $_POST["password"]);
+    $user = User::login($_POST["email"], $_POST["password"]);
     if (!$user) {
-        return "The username or password you provided was invalid.";
+        return "The email or password you provided was invalid.";
     }
     $_SESSION["user"] = $user;
     return "";
@@ -15,7 +15,7 @@ function handle_login() {
 
 $error_message = "";
 if (isset($_SESSION["user"])) {
-    $error_message = "You are already logged in as " . $_SESSION["user"]->username . ".";
+    $error_message = "You are already logged in as " . $_SESSION["user"]->email . ".";
 } else if (get_http_method() == "POST") {
     $error_message = handle_login();
     if ($error_message == "") {
@@ -31,9 +31,9 @@ layout_header();
     </div>
     <form class="form-horizontal" action="" method="POST">
         <div class="form-group">
-            <label class="col-md-2 col-md-offset-1 control-label" for="input-username">Username</label>
+            <label class="col-md-2 col-md-offset-1 control-label" for="input-email">Email</label>
             <div class="col-md-6">
-                <input class="form-control" id="input-username" name="username" type="text" required autofocus />
+                <input class="form-control" id="input-email" name="email" type="email" required autofocus />
             </div>
         </div>
         <div class="form-group">
@@ -48,6 +48,10 @@ layout_header();
                 &nbsp;
                 <a href="register.php">
                     <button class="btn btn-info btn-register" type="button">Register</button>
+                </a>
+                &nbsp;
+                <a href="forgot-password.php">
+                    <button class="btn btn-warning" type="button">Forgot Password</button>
                 </a>
             </div>
         </div>

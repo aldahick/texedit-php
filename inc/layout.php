@@ -8,7 +8,7 @@ function layout_header() {
     if (isset($_VIEW["title"])) {
         $title = $_VIEW["title"] . " - " . $title;
     }
-    if ($page_name != "/register" && $page_name != "/login") {
+    if ($page_name != "/register" && $page_name != "/login" && $page_name != "/forgot-password" && $page_name != "/reset_password") {
         $_SESSION["last_page"] = substr($page_name, 1) . ".php";
         if (strlen($_SERVER['QUERY_STRING']) > 0) {
             $_SESSION["last_page"] .= "?" . $_SERVER['QUERY_STRING'];

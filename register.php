@@ -11,13 +11,13 @@ $user = array();
  * Returns any error as a string
  */
 function handle_registration() {
-    if (!check_params(array("username", "password", "password2"))) {
+    if (!check_params(array("email", "password", "password2"))) {
         return "You are missing one or more required fields.";
     }
     if ($_POST["password"] != $_POST["password2"]) { // password matches confirm password
         return "The passwords you entered do not match.";
     }
-    $user = User::register($_POST["username"], $_POST["password"]);
+    $user = User::register($_POST["email"], $_POST["password"]);
     if (!$user) {
         return "An internal error occurred. Please try again later.";
     }
@@ -60,7 +60,7 @@ function form_group($name, $input_type, $code_name = "") {
     <hr />
     <form class="form-horizontal" id="form-register" action="" method="POST">
         <?php
-        form_group("Username", "text");
+        form_group("Email", "email");
         form_group("Password", "password");
         form_group("Confirm Password", "password", "password2");
         ?>

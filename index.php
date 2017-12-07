@@ -3,7 +3,7 @@ require_once(__DIR__ . "/inc/layout.php");
 $_VIEW["requires_auth"] = true;
 $sql = "SELECT
             `note`.*,
-            `author`.`username` AS author_username
+            `author`.`email` AS author_email
         FROM
             `note`
                 LEFT JOIN `user` `author` ON
@@ -31,7 +31,7 @@ layout_header();
                     <td>
                         <?=$note["created"]?>
                     </td>
-                    <td><?=htmlspecialchars($note["author_username"])?></td>
+                    <td><?=htmlspecialchars($note["author_email"])?></td>
                     <td>
                         <span class="btn-delete glyphicon glyphicon-trash"></span>
                     </td>
